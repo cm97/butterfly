@@ -1,61 +1,112 @@
-# Butterfly — Claude Code Instructions
+# CLAUDE.md — Butterfly Storefront Build Instructions
 
-You are working on the Butterfly project (cm97/butterfly). The goal: turn this repo into a **revenue-worthy digital products storefront** that makes the owner's digital products worth buying.
+You are a senior conversion-rate optimization engineer and direct-response copywriter working on the Butterfly repo (cm97/butterfly). Your job: make `index.html` the highest-converting digital products storefront possible — the kind of page that makes a visitor want to buy within five seconds of landing.
 
-## Context
+## The standard you are being held to
 
-- The owner (cm97) sells digital products: Notion templates, ebooks, mini-SaaS tools. Solo, no employees, no capital.
-- The current `index.html` is a joke page (a candle that "prints" fake money). It is NOT the product. Do not expand the joke.
-- The real product is a **landing page + storefront** for the digital products, built so visitors have a reason to buy.
+This page must outperform the revenue-generating pages of Google, GoDaddy, and any top-converting SaaS/digital-product storefront. That means:
+
+- **Every section earns its place.** If a section doesn't move a visitor toward the buy button, cut it.
+- **The headline names the outcome, not the product.** Visitors don't buy templates — they buy the life the template gives them.
+- **Objection handling is built into the page**, not bolted on. FAQ, guarantee, trust signals, and social proof appear before the visitor has to ask.
+- **Pricing psychology is deliberate.** Crossed-out prices, a recommended tier, a guarantee line, and a single clear CTA per product.
+- **Zero friction to purchase.** One click from "I want this" to payment. No account creation, no multi-step forms, no dead ends.
+- **Mobile-first, fast, accessible.** Loads instantly, readable on a phone, keyboard-navigable, high contrast.
 
 ## What to build
 
-Replace/upgrade `index.html` into a single-file, self-contained landing page (no build step, no dependencies, works on GitHub Pages) with ALL of the following:
+Rebuild `index.html` as a single-file, self-contained landing page (no build step, no external dependencies beyond system fonts, no third-party scripts or tracking pixels). It must include ALL of the following sections, in this order:
 
-### 1. Hero section
-- One clear headline: what the buyer gets and why it matters NOW.
-- One subheadline: the specific pain it solves.
-- One primary CTA button (e.g. "Get it now" / "Buy").
-- Trust signals: "Instant download", "No subscription", "Built by a solo creator".
+### 1. Sticky navigation
+- Logo on the left, single CTA button on the right ("Browse Products" or equivalent).
+- Blurred, semi-transparent background so it stays readable over any hero.
 
-### 2. Product grid
-- Cards for each digital product. Each card: name, one-line benefit, price, and a CTA.
-- Use placeholder product data the owner can edit (name, description, price, download link).
-- Make it easy to add/remove products by editing one array in the `<script>`.
+### 2. Hero section
+- One headline that names the visitor's desired outcome in plain language. Not "we sell Notion templates" — the result of owning them.
+- One subheadline that names the specific pain being solved.
+- One primary CTA button.
+- A trust-signal row: instant download, no subscription, money-back guarantee, built by a solo creator.
+- Visual interest via CSS only (gradient glow, subtle animation). No image files required.
 
-### 3. Social proof section
-- Testimonials (placeholder, clearly marked as examples the owner should replace with real ones).
-- A "results" or "before/after" block showing the transformation the product delivers.
+### 3. Product grid
+- One card per product. Each card contains: product name, a one-line benefit (not a description — a benefit), a short description, price, optional crossed-out original price, an optional badge ("POPULAR", "NEW", or none), and a buy button.
+- All product data lives in ONE JavaScript array at the bottom of the `<script>` tag. The owner edits that array; they never touch layout code.
+- The middle-tier or flagship product gets the "POPULAR" badge and a subtle glow/border treatment.
+- Buy buttons link to placeholder payment URLs (`https://YOUR-PAYMENT-LINK-HERE`) that the owner replaces with real Gumroad, Lemon Squeezy, or Stripe Payment Link URLs.
 
-### 4. FAQ section
-- 5+ questions buyers actually ask: refunds, file formats, how delivery works, whether it needs a subscription, support.
-- Answers should reduce friction and build trust.
+### 4. Before/after transformation block
+- Two columns: "Before" (pain state, with ✗ markers) and "After" (desired state, with ✓ markers).
+- This is the emotional core of the page. It makes the visitor feel the gap between their current life and the one the product delivers.
 
-### 5. Pricing psychology
-- Show an "original" crossed-out price next to the real price on at least one product.
-- One recommended/popular badge on a middle-tier option.
-- A guarantee line (e.g. "30-day money-back guarantee").
+### 5. Social proof section
+- Three testimonial cards. Use clearly labeled PLACEHOLDER text — never invent fake customer names or quotes. The owner will replace them with real testimonials.
+- Each placeholder should model what a strong testimonial looks like (specific result, named role) so the owner knows what to collect.
 
-### 6. Footer
-- Contact email, copyright, and a one-line honest disclaimer.
+### 6. FAQ section
+- Six questions that a skeptical buyer actually asks before spending money:
+  1. How do I get my download?
+  2. What file formats are included?
+  3. Is there a subscription?
+  4. What if it doesn't work for me?
+  5. Do I get updates?
+  6. Can I get help if I'm stuck?
+- Answers must be short, direct, and confidence-building. No corporate hedging.
+- Use native `<details>`/`<summary>` elements for zero-JS interactivity.
 
-## Design rules
+### 7. Final CTA section
+- A closing headline that reframes the price against the value of the visitor's time.
+- One CTA button pointing back to the products section.
 
-- Dark theme, high contrast, readable on mobile.
-- Fast: no external fonts beyond system stacks, no images required (use CSS/emoji/SVG).
-- Accessible: buttons have labels, contrast is sufficient.
-- One page, one job: get the visitor to click a buy/download button.
+### 8. Footer
+- Copyright year (set dynamically via JavaScript), contact email (placeholder), privacy/terms links (placeholders), and a one-line honest disclaimer.
+
+## Copy rules (non-negotiable)
+
+1. **Benefit before feature.** "Stop losing deals to forgotten follow-ups" beats "A Notion dashboard with 12 views."
+2. **Specific beats vague.** "Two hours becomes twenty minutes" beats "saves you time."
+3. **One idea per sentence.** Short sentences. No semicolons. No jargon.
+4. **The visitor is the hero.** The page is about THEIR problem, not about the creator.
+5. **No fake urgency.** No countdown timers, no "only 3 left," no fake scarcity. Trust is the conversion lever here.
+6. **No invented testimonials, stats, or customer counts.** Placeholders only, clearly marked.
+
+## Design rules (non-negotiable)
+
+1. Dark theme (`#0a0a0f` background), high-contrast text, accent color used sparingly for CTAs and highlights.
+2. System font stack only. No Google Fonts, no external CSS, no external JS.
+3. Responsive: works on a 375px-wide phone without horizontal scroll.
+4. All interactive elements have visible focus states and sufficient tap targets (min 44px).
+5. Animations are subtle (hover lifts, gentle glows) and respect `prefers-reduced-motion`.
+6. Total page weight under 100KB. It should feel instant.
 
 ## What NOT to do
 
-- Do not add the candle/money-printer joke to the storefront.
-- Do not add analytics, tracking pixels, or third-party scripts.
-- Do not invent real testimonials or fake customer names — use clearly labeled placeholders.
-- Do not add a backend, database, or payment processing. Keep it static HTML/CSS/JS. Payment links (Gumroad, Lemon Squeezy, Stripe Payment Links) should be placeholder URLs the owner fills in.
+- Do not add the candle/money-printer joke. It is retired.
+- Do not add analytics, tracking pixels, chat widgets, or third-party scripts.
+- Do not add a backend, database, authentication, or cart system. Static HTML/CSS/JS only.
+- Do not add multiple pages. One page, one job: get the click.
+- Do not write copy that promises specific income results ("make $10k/month") — that triggers ad-platform and legal problems and destroys trust.
 
 ## Success criteria
 
-- `index.html` opens in any browser and looks like a professional digital products storefront.
-- All placeholder content is in ONE editable data structure in the script.
-- The page answers "why should I buy this?" within 5 seconds of landing.
-- README.md is updated with: how to customize products, how to deploy to GitHub Pages, and how to connect a real payment link.
+- [ ] `index.html` opens in any browser and renders a complete, professional storefront.
+- [ ] All product content is editable from one array in the script.
+- [ ] A new visitor understands what is sold, why it matters, and what to do next within 5 seconds.
+- [ ] Every objection a digital-product buyer has is answered on the page before they ask.
+- [ ] The page passes basic accessibility checks (contrast, labels, keyboard nav).
+- [ ] `README.md` is updated with: how to edit products, how to deploy to GitHub Pages, and how to connect real payment links.
+- [ ] Zero external dependencies. Zero tracking. Zero backend.
+
+## Reference: why these patterns convert
+
+These are the conversion patterns used by the highest-grossing digital product and SaaS pages:
+
+- **Outcome-first headlines** (Apple, Stripe) — sell the result, not the mechanism.
+- **Trust row near the CTA** (GoDaddy, Shopify) — remove risk before asking for money.
+- **Crossed-out pricing** (Amazon, most e-commerce) — anchors the real price as a deal.
+- **Recommended-tier badge** (SaaS pricing pages) — tells the visitor which option to pick, reducing decision paralysis.
+- **Before/after contrast** (fitness and coaching funnels) — creates the emotional gap that drives purchase.
+- **FAQ before footer** (most top-converting pages) — handles objections at the moment of highest intent.
+- **Single CTA per section** (conversion-focused design) — one action, no competing buttons.
+- **Guarantee near price** (digital product best practice) — the #1 objection to digital purchases is "what if it sucks," and the guarantee kills it.
+
+Work through the checklist above. When done, the page should be ready to deploy and ready to sell.
